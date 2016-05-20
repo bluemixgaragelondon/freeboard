@@ -26,22 +26,6 @@
     // **settings** : An array of settings that will be displayed for this plugin when the user adds it.
     "settings"    : [
       {
-        // **name** (required) : The name of the setting. This value will be used in your code to retrieve the value specified by the user. This should follow naming conventions for javascript variable and function declarations.
-        "name"         : "username",
-        // **display_name** : The pretty name that will be shown to the user when they adjust this setting.
-        "display_name" : "Basic Auth Username",
-        // **type** (required) : The type of input expected for this setting. "text" will display a single text box input. Examples of other types will follow in this documentation.
-        "type"         : "text",
-        // **required** : If set to true, the field will be required to be filled in by the user. Defaults to false if not specified.
-        "required" : true
-      },
-      {
-        "name"        : "password",
-        "display_name": "Basic Auth password",
-        // **type "calculated"** : This is a special text input box that may contain javascript formulas and references to datasources in the freeboard.
-        "type"        : "text"
-      },
-      {
           "name"        : "pipeline",
           "display_name": "pipeline",
           // **type "number"** : A data of a numerical type. Requires the user to enter a numerical value
