@@ -18,34 +18,28 @@
   // **freeboard.loadDatasourcePlugin(definition)** tells freeboard that we are giving it a datasource plugin. It expects an object with the following:
   freeboard.loadDatasourcePlugin({
     // **type_name** (required) : A unique name for this plugin. This name should be as unique as possible to avoid collisions with other plugins, and should follow naming conventions for javascript variable and function declarations.
-    "type_name"   : "concourse",
+    "type_name"   : "bluemix-dos",
     // **display_name** : The pretty name that will be used for display purposes for this plugin. If the name is not defined, type_name will be used instead.
-    "display_name": "Concourse CI",
+    "display_name": "Bluemix DevOps Services",
         // **description** : A description of the plugin. This description will be displayed when the plugin is selected or within search results (in the future). The description may contain HTML if needed.
-        "description" : "A build monitor for Concourse CI",
+        "description" : "A build monitor for Bluemix DevOps Services",
     // **settings** : An array of settings that will be displayed for this plugin when the user adds it.
     "settings"    : [
       {
         // **name** (required) : The name of the setting. This value will be used in your code to retrieve the value specified by the user. This should follow naming conventions for javascript variable and function declarations.
-        "name"         : "username",
+        "name"         : "account",
         // **display_name** : The pretty name that will be shown to the user when they adjust this setting.
-        "display_name" : "Basic Auth Username",
+        "display_name" : "DevOps Services Account",
         // **type** (required) : The type of input expected for this setting. "text" will display a single text box input. Examples of other types will follow in this documentation.
         "type"         : "text",
         // **required** : If set to true, the field will be required to be filled in by the user. Defaults to false if not specified.
         "required" : true
       },
       {
-        "name"        : "password",
-        "display_name": "Basic Auth password",
+        "name"        : "project",
+        "display_name": "Project Name",
         // **type "calculated"** : This is a special text input box that may contain javascript formulas and references to datasources in the freeboard.
         "type"        : "text"
-      },
-      {
-          "name"        : "pipeline",
-          "display_name": "pipeline",
-          // **type "number"** : A data of a numerical type. Requires the user to enter a numerical value
-          "type"        : "text"
       },
       {
         "name"         : "refresh_time",
@@ -84,18 +78,9 @@
     function getData()
     {
       $.ajax({
-        url: "/concourse/api/v1/pipelines/"+currentSettings.pipeline+"/jobs",
-        success: function(results){
-          results = JSON.parse(results);
-          results = results.map(function(result){
-            return result.next_build || result.finished_build;
-          });
-
-          latest = results.reduce(function(prev, next){
-            return next.id > prev.id ? next : prev;
-          }, {id: -Infinity});
-
-          updateCallback(latest);
+        url: "/bmdos/"+currentSettings.account+"/"+currentSettings.project,
+        success: function(result){
+          updateCallback(result);
         },
         error: function(){
           document.body.innerHTML = "<h1>Polling failed</h1>";
@@ -146,3 +131,4 @@
     createRefreshTimer(currentSettings.refresh_time);
   }
 }());
+
