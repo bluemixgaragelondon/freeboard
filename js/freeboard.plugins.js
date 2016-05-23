@@ -330,6 +330,7 @@
     {
       $.ajax({
         url: "/concourse/api/v1/pipelines/"+currentSettings.pipeline+"/jobs",
+        timeout: currentSettings.refresh_time,
         success: function(results){
           results = JSON.parse(results);
           results = results.map(function(result){
@@ -345,7 +346,7 @@
         error: function(){
           var error = {
             status: 'connection-error',
-            pipeline: currentSettings.pipeline
+            pipeline_name: currentSettings.pipeline
           }
           updateCallback(error);
         }
