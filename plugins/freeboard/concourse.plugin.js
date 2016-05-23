@@ -82,7 +82,11 @@
           updateCallback(latest);
         },
         error: function(){
-          document.body.innerHTML = "<h1>Polling failed</h1>";
+          var error = {
+            status: 'connection-error',
+            pipeline: currentSettings.pipeline
+          }
+          updateCallback(error);
         }
       });
     }

@@ -3107,11 +3107,16 @@ $.extend(freeboard, jQuery.eventEmitter);
     {
       $.ajax({
         url: "/bmdos/"+currentSettings.account+"/"+currentSettings.project,
+        timeout: currentSettings.refresh_time,
         success: function(result){
-          updateCallback(result);
+          updateCallback(JSON.parse(result));
         },
         error: function(){
-          document.body.innerHTML = "<h1>Polling failed</h1>";
+          var error = {
+            status: 'connection-error',
+            pipeline_name: currentSettings.account+"/"+currentSettings.project
+          };
+          updateCallback(error);
         }
       });
     }
@@ -3265,12 +3270,13 @@ $.extend(freeboard, jQuery.eventEmitter);
         "failed": "red",
         "errored": "organge",
         "aborted": "brown",
-        "paused": "blue"
+        "paused": "blue",
+        "connection-error": "black"
       };
 
       $(myContainerElement).css("background-color", colors[build.status]);
       $(myContainerElement).css("transition", "1s ease-in-out");
-      $(myTextElement).attr('href', "/concourse"+build.url)
+      $(myTextElement).attr('href', build.url)
       $(myTextElement).html("<h3>" +build.pipeline_name + '</h3><h4>' + build.job_name + '</h4><h5>' + build.status + '</h5>');
     }
 
@@ -3365,7 +3371,11 @@ $.extend(freeboard, jQuery.eventEmitter);
           updateCallback(latest);
         },
         error: function(){
-          document.body.innerHTML = "<h1>Polling failed</h1>";
+          var error = {
+            status: 'connection-error',
+            pipeline: currentSettings.pipeline
+          }
+          updateCallback(error);
         }
       });
     }

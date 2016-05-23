@@ -79,11 +79,16 @@
     {
       $.ajax({
         url: "/bmdos/"+currentSettings.account+"/"+currentSettings.project,
+        timeout: currentSettings.refresh_time,
         success: function(result){
           updateCallback(JSON.parse(result));
         },
         error: function(){
-          document.body.innerHTML = "<h1>Polling failed</h1>";
+          var error = {
+            status: 'connection-error',
+            pipeline_name: currentSettings.account+"/"+currentSettings.project
+          };
+          updateCallback(error);
         }
       });
     }
