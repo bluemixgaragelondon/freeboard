@@ -5117,8 +5117,7 @@ freeboard.loadDatasourcePlugin({
 
 }());
 
-var persistDashboard = function(_thisref, event)
-{
+var persistDashboard = function(_thisref, event) {
   var username = 'radiator';
   var password = prompt('Enter radiator password', '');
   var basicAuth = 'Basic ' + btoa(username +':' + password);
@@ -5145,4 +5144,7 @@ var persistDashboard = function(_thisref, event)
     console.log(err);
     alert(err);
   });
-}
+};
+
+var persistBtn = '<li id="persist-dashboard" data-bind="click: persistDashboard"><i class="icon-download-alt icon-white"></i><label>Persist Dashboard</label></li>';
+$('.board-toolbar.vertical').append(persistBtn);

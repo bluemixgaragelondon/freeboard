@@ -26,3 +26,6 @@ var persistDashboard = function(_thisref, event) {
     alert(err);
   });
 };
+
+var persistBtn = '<li id="persist-dashboard" data-bind="click: persistDashboard"><i class="icon-download-alt icon-white"></i><label>Persist Dashboard</label></li>';
+$('.board-toolbar.vertical').append(persistBtn);
