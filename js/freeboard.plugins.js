@@ -81,7 +81,7 @@
         url: "/bmdos/"+currentSettings.account+"/"+currentSettings.project,
         timeout: currentSettings.refresh_time,
         success: function(result){
-          updateCallback(JSON.parse(result));
+          updateCallback(result);
         },
         error: function(){
           var error = {
