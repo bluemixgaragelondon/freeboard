@@ -72,15 +72,7 @@
         timeout: currentSettings.refresh_time,
         success: function(results){
           results = JSON.parse(results);
-          results = results.map(function(result){
-            return result.next_build || result.finished_build;
-          });
-
-          latest = results.reduce(function(prev, next){
-            return next.id > prev.id ? next : prev;
-          }, {id: -Infinity});
-
-          updateCallback(latest);
+          updateCallback(results);
         },
         error: function(){
           var error = {
