@@ -3357,12 +3357,9 @@ $.extend(freeboard, jQuery.eventEmitter);
     function getData()
     {
       $.ajax({
-        url: "/concourse/api/v1/pipelines/"+currentSettings.pipeline+"/jobs",
+        url: "/concourse/"+currentSettings.pipeline,
         timeout: currentSettings.refresh_time,
-        success: function(results){
-          results = JSON.parse(results);
-          updateCallback(results);
-        },
+        success: updateCallback,
         error: function(){
           var error = {
             status: 'connection-error',
