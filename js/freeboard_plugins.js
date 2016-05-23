@@ -3277,7 +3277,7 @@ $.extend(freeboard, jQuery.eventEmitter);
       $(myContainerElement).css("background-color", colors[build.status]);
       $(myContainerElement).css("transition", "1s ease-in-out");
       $(myTextElement).attr('href', build.url)
-      $(myTextElement).html("<h3>" +build.pipeline_name + '</h3><h4>' + build.job_name + '</h4><h5>' + build.status + '</h5>');
+      $(myTextElement).html("<h3>" +build.pipeline_name + "</h3><h4>" + build.job_name + "</h4><h5>" + build.status + "</h5>"+"<p>AAA</p>");
     }
 
     // **onDispose()** (required) : Same as with datasource plugins.
