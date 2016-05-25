@@ -78,6 +78,7 @@
           } catch(e) {
             value = result;
           }
+          value.type = "concourse";
           updateCallback(value);
         },
         error: function(){

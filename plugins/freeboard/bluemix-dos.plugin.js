@@ -88,6 +88,7 @@
           } catch(e) {
             value = result;
           }
+          value.type = "bmdos";
           updateCallback(value);
         },
         error: function(){

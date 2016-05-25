@@ -106,10 +106,14 @@
         "connection-error": "black"
       };
 
+      var buildImage = build.type === "concourse" ? "concourse-logo.png" : "bluemix-logo.png";
+
+      var img = "<img src='img/" + buildImage + "' height='25' width='25'>";
+
       $(myContainerElement).css("background-color", colors[build.status]);
       $(myContainerElement).css("transition", "1s ease-in-out");
       $(myTextElement).attr('href', build.url)
-      $(myTextElement).html("<h3>" +build.pipeline_name + "</h3><h4>" + build.job_name + "</h4><h5>" + build.status + "</h5>");
+      $(myTextElement).html("<h3>" +build.pipeline_name + "</h3><h4>" + build.job_name + " - " + build.status + "</h4>" + "<h5>" + img + "</h5>");
     }
 
     // **onDispose()** (required) : Same as with datasource plugins.
