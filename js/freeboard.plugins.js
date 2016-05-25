@@ -243,13 +243,13 @@
     self.onCalculatedValueChanged = function(settingName, build)
     {
       var colors = {
-        "pending": "grey",
+        "pending": "#BDC3C7",
         "started": "#F1C40F",
-        "succeeded": "green",
-        "failed": "red",
-        "errored": "organge",
-        "aborted": "brown",
-        "paused": "blue",
+        "succeeded": "#2ECC71",
+        "failed": "#E74C3C",
+        "errored": "#E67E22",
+        "aborted": "#8F4B2D",
+        "paused": "#3498DB",
         "connection-error": "black"
       };
 
