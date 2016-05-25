@@ -70,7 +70,16 @@
       $.ajax({
         url: "/concourse/"+currentSettings.pipeline,
         timeout: currentSettings.refresh_time,
-        success: updateCallback,
+        success: function(result){
+          //This is a workaround for the samsung tv browsers poor handling of json.
+          var value;
+          try {
+            value = JSON.parse(result);
+          } catch(e) {
+            value = result;
+          }
+          updateCallback(value);
+        },
         error: function(){
           var error = {
             status: 'connection-error',

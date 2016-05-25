@@ -81,7 +81,14 @@
         url: "/bmdos/"+currentSettings.account+"/"+currentSettings.project,
         timeout: currentSettings.refresh_time,
         success: function(result){
-          updateCallback(result);
+          //This is a workaround for the samsung tv browsers poor handling of json.
+          var value;
+          try {
+            value = JSON.parse(result);
+          } catch(e) {
+            value = result;
+          }
+          updateCallback(value);
         },
         error: function(){
           var error = {
