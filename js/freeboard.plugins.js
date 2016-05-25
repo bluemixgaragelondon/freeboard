@@ -81,7 +81,14 @@
         url: "/bmdos/"+currentSettings.account+"/"+currentSettings.project,
         timeout: currentSettings.refresh_time,
         success: function(result){
-          updateCallback(result);
+          //This is a workaround for the samsung tv browsers poor handling of json.
+          var value;
+          try {
+            value = JSON.parse(result);
+          } catch(e) {
+            value = result;
+          }
+          updateCallback(value);
         },
         error: function(){
           var error = {
@@ -237,7 +244,7 @@
     {
       var colors = {
         "pending": "grey",
-        "started": "yellow",
+        "started": "#F1C40F",
         "succeeded": "green",
         "failed": "red",
         "errored": "organge",
@@ -249,7 +256,7 @@
       $(myContainerElement).css("background-color", colors[build.status]);
       $(myContainerElement).css("transition", "1s ease-in-out");
       $(myTextElement).attr('href', build.url)
-      $(myTextElement).html("<h3>" +build.pipeline_name + "</h3><h4>" + build.job_name + "</h4><h5>" + build.status + "</h5>"+"<p>AAA</p>");
+      $(myTextElement).html("<h3>" +build.pipeline_name + "</h3><h4>" + build.job_name + "</h4><h5>" + build.status + "</h5>");
     }
 
     // **onDispose()** (required) : Same as with datasource plugins.
@@ -331,7 +338,16 @@
       $.ajax({
         url: "/concourse/"+currentSettings.pipeline,
         timeout: currentSettings.refresh_time,
-        success: updateCallback,
+        success: function(result){
+          //This is a workaround for the samsung tv browsers poor handling of json.
+          var value;
+          try {
+            value = JSON.parse(result);
+          } catch(e) {
+            value = result;
+          }
+          updateCallback(value);
+        },
         error: function(){
           var error = {
             status: 'connection-error',

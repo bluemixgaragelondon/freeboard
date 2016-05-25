@@ -97,7 +97,7 @@
     {
       var colors = {
         "pending": "grey",
-        "started": "yellow",
+        "started": "#F1C40F",
         "succeeded": "green",
         "failed": "red",
         "errored": "organge",
